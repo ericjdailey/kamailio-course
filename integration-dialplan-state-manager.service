@@ -1,0 +1,22 @@
+[Unit]
+Description=Integration Dialplan State Manager (Asterisk extensions.conf switcher)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+# Reuse the same env file location as before
+EnvironmentFile=-/etc/integration_state.env
+
+# Adjust path if you install the script elsewhere (recommended: /usr/local/bin/)
+ExecStart=/usr/local/bin/integration_dialplan_state_manager.sh --daemon
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
